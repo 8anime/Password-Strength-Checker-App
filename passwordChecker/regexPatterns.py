@@ -12,10 +12,8 @@ def isValidPassword(password):
     .{8,}        # Must be at least 8 characters long
     )'''
 
-    if re.match(pattern, password, re.VERBOSE):  # 're.VERBOSE' enables whitespace and comments within the pattern for better readability
-        print('Password meets the criteria')
-    else:
-        print('Password does not meet the criteria')
+    return bool(re.match(pattern, password, re.VERBOSE))  # 're.VERBOSE' enables whitespace and comments within the pattern for better readability
+        
 
 
 
