@@ -1,6 +1,8 @@
 
 import sys
+import os
 
+from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import (
     QApplication,
     QWidget,
@@ -40,7 +42,7 @@ class PasswordCheckerApp(QWidget):
         self.checkPasswordButton = QPushButton('Check Password')
 
         # This label is used to give feedback to the user, whether the password is valid or NOT valid
-        self.resultLabel = QLabel('Result: ')  
+        self.resultLabel = QLabel('')  
 
         widgetLayout.addWidget(self.passwordLabel)  # Add widget to the vertical orientation
         widgetLayout.addWidget(self.passwordInput)  # Add widget to the vertical orientation
@@ -55,12 +57,15 @@ class PasswordCheckerApp(QWidget):
     def checkPassword(self):
         """This method is used to check if the password entered in the input box
         meets the criteria of a valid password or not"""
+        tickImage = os.path.join('icons', 'tick.png')  # Construct a path to the tick.png file
+        crossImage = os.path.join('icons', 'cross.png')  # Construct a path to the cross.png file
+
         password = self.passwordInput.text()  # Extract a text from the input box
         isValid = isValidPassword(password)  # Using the isValidPassword function, check if the password is valid
         if isValid:
-            self.resultLabel.setText('Result: Password is valid')  # If True set this text to the resultLabel widget
+            self.resultLabel.setPixmap(QPixmap(tickImage))  # If True using the QPixmap class, set the tick image
         else:
-            self.resultLabel.setText('Result: Password is invalid')  # If False set this text to the resultLabel widget
+            self.resultLabel.setPixmap(QPixmap(crossImage)) # If False using the QPixmap class, set the cross image
 
 
 if __name__ == '__main__':
