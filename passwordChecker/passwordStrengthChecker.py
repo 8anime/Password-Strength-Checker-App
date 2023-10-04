@@ -38,6 +38,7 @@ class PasswordCheckerApp(QWidget):
 
         self.passwordLabel = QLabel('Enter Password: ')  # Label asking for the password input
         self.passwordInput = QLineEdit()  # This is the field where the password will be inputed
+        self.passwordInput.setPlaceholderText('Password must contain at least one special character (!@#$%^&*_).')
         # "The 'Check Password' button is used to verify if the entered password meets the specified criteria for a valid password
         self.checkPasswordButton = QPushButton('Check Password')
 
