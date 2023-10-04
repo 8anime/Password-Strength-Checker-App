@@ -42,6 +42,8 @@ class PasswordCheckerApp(QWidget):
         # "The 'Check Password' button is used to verify if the entered password meets the specified criteria for a valid password
         self.checkPasswordButton = QPushButton('Check Password')
 
+        self.strengthLabel = QLabel('Password Strength: ')
+
         # This label is used to give feedback to the user, whether the password is valid or NOT valid
         self.resultLabel = QLabel('')  
 
@@ -49,6 +51,7 @@ class PasswordCheckerApp(QWidget):
         widgetLayout.addWidget(self.passwordInput)  # Add widget to the vertical orientation
         widgetLayout.addWidget(self.checkPasswordButton)  # Add widget to the vertical orientation
         widgetLayout.addWidget(self.resultLabel)  # Add widget to the vertical orientation
+        widgetLayout.addWidget(self.strengthLabel)  # Add widget to the vertical orientation
 
         # Connect the button to a method that will analyze the password and check it's validity
         self.checkPasswordButton.clicked.connect(self.checkPassword)  
@@ -68,6 +71,36 @@ class PasswordCheckerApp(QWidget):
         else:
             self.resultLabel.setPixmap(QPixmap(crossImage)) # If False using the QPixmap class, set the cross image
 
+        passwordStrength = self.calculatePasswordStrength(password)  # Return integer value from the calculatePasswordStrength method
+        # Display feedback to the user about the strength of the password in form of percentage
+        self.strengthLabel.setText(f'Password Strength: {passwordStrength}%')  
+
+    def calculatePasswordStrength(self, password):
+        """This method is used to calculate the password strength of a password"""
+        # Initialize a base score
+        score = 0
+        
+        # Check the number of characters in the password
+        length = len(password)
+        if length >= 8:
+            score += 20  # Award 20% for a password of 8 characters or more
+        else:
+            return 0  # Password is too short, return 0% strength
+    
+        # Check for special characters
+        specialCharacters = "!@#$%^&*()_+-=[]{}|;':,.<>?/~`"
+        # Count the occurrences of characters in the password string that are also present in the specialCharacters string. 
+        # It yields 2 for every character found, and when you sum these 2 values using the sum function, you get the count 
+        # of special characters in the password string.
+        numSpecialChars = sum(2 for char in password if char in specialCharacters)
+        
+        # Adjust the score based on the number of special characters
+        score += numSpecialChars * 10  # Award 10% for each special character
+
+        # Calculate the final score
+        finalScore = min(score, 100)  # The score value should not exceed 100
+    
+        return finalScore  # Cap the score at 100%
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
