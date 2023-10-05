@@ -12,6 +12,7 @@ __pycache__/
 *.o
 *.a
 *.out
+*.pytest_cache
 
 # Ignore development and IDE-specific files
 .vscode/
