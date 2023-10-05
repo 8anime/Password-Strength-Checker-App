@@ -15,13 +15,13 @@ def isValidPassword(password):
     ]
 
     pattern = rf'''
-    (?=.*[A-Z])             # Must contain uppercase letters
-    (?=.*[a-z])             # Must contain lowercase letters
-    (?=.*\d)                # Must contain at least one digit
-    (?=.*[\W_])             # Must contain at least one special character
-    (?!.*\s)                # Must not contain space characters
-    (?!.*(?:{'|'.join(commonPatterns)}))  # Must not contain common patterns or names
+    (?=.*[A-Z])                           # Must contain uppercase letters
+    (?=.*[a-z])                           # Must contain lowercase letters
+    (?=.*\d)                              # Must contain at least one digit
+    (?=.*[\W_])                           # Must contain at least one special character
+    (?!.*\s)                              # Must not contain space characters
     (?!.*(\w)\1{{2,}})                    # Must not contain repetitive sequences of 3 or more characters
+    (?!.*(?:{'|'.join(commonPatterns)}))  # Must not contain common patterns or names
     .{{8,}}                               # Must be at least 8 characters long
     '''
 
