@@ -10,7 +10,7 @@ The Password Strength Checker is a Python application built using PyQt5 that all
 - Checks password length: Passwords must be at least 8 characters long.
 - Requires a mix of uppercase and lowercase letters.
 - Requires at least one digit.
-- Requires at least one special character from the following: !@#$%^&*.
+- Requires at least one special character from the following: !@#$%^&*()_+-=[]{}|;':,.<>?/~`.
 - Does not allow spaces between characters.
 - Avoids common patterns, such as email-like patterns, Vehicle Identification Numbers (VIN), social media handles, and IPv6 Addresses.
 - Prevents repetitive sequences of 3 or more characters.
